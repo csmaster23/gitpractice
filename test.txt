@@ -1,3 +1,8 @@
 One 
 Two 
-Three
+<<<<<<<<<< HEAD
+ready?
+Go!
+=========
+go
+>>>>>>>>> c6fe9cf1097175eedb0877f4a35e37cab1865350
