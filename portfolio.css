@@ -1,0 +1,60 @@
+h1 {
+	font-family: 'Roboto', sans-serif;
+	background-color: #FF7F20;
+	font-weight: 100;
+	color: #333;	
+}
+
+h2 {
+	background-color: #20E7FF;
+	color: #333;
+}
+
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+
+	background-color: #333;
+}
+
+nav li {
+	float: left;
+}
+
+nav li a {
+	display: block;
+	color: pink;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+/*Change the link color to #111 (black) on hover*/
+nav li a:hover {
+	background-color: #111;
+}
+
+nav.active {
+	background-color: #4CAF50;
+}
+
+section {
+	display: flex;
+	justify-content: center;
+	justify-content: space-around;
+}
+
+article {
+	flex: 4 
+}
+
+aside {
+	flex: 1
+}
+
+.verticalLine {
+	border-left: thick solid #333;
+}
+
