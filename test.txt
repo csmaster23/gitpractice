@@ -1,8 +1,0 @@
-One 
-Two 
-<<<<<<< HEAD
-ready?
-Go!
-=======
-go
->>>>>>> fe8d7ee75227ecb02ec8370ed3e122ee47c72911
