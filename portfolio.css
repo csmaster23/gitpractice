@@ -2,10 +2,19 @@ html {
 	background-color: #B6C7CC;
 }
 
-.artist img {
-	float: right; 
-	width: 50%;
-	height: 50%
+.column img {
+	float: right;
+	width: 80%;
+	height: 80%;
+}
+.a {
+	float: left;
+}
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
 }
 
 	
@@ -55,7 +64,7 @@ h1 {
 }
 
 .footer {
-        position: absolute;
+        position: relative;
         right: 0;
         bottom: 0;
         left: 0;
