@@ -1,60 +1,114 @@
-h1 {
-	font-family: 'Roboto', sans-serif;
-	background-color: #FF7F20;
-	font-weight: 100;
-	color: #333;	
+html {
+	background-color: #B6C7CC;
 }
 
-h2 {
-	background-color: #20E7FF;
-	color: #333;
+.artist img {
+	float: right; 
+	width: 50%;
+	height: 50%
+}
+
+	
+
+.grid {
+	display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	grid-gap: 5px;
+}
+
+.box img {
+        border-radius: 5px;
+        width: 100%;
+	height: auto;
+}
+
+.long img {
+	border-radius: 5px;
+	width: 100%;
+	height: auto;
+	
+}
+
+
+
+h1 {
+        font-family: 'Merienda One';
+        font-size: 50px;
+}
+
+.column {
+	display: inline-block;
+	width: 33.3%;
+}
+
+.Reviews:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+
+
+.main_image {
+        width: 100%;
+}
+
+.footer {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        background-color: #efefef;
+        text-align: center;
 }
 
 nav ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
 
-	background-color: #333;
+        background-color: #333;
 }
 
 nav li {
-	float: left;
+        float: left;
 }
 
 nav li a {
-	display: block;
-	color: pink;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
 }
 
 /*Change the link color to #111 (black) on hover*/
 nav li a:hover {
-	background-color: #111;
-}
+        background-color: #111;
+        }
 
 nav.active {
-	background-color: #4CAF50;
+        background-color: #4CAF50;
 }
 
 section {
-	display: flex;
-	justify-content: center;
-	justify-content: space-around;
+        display: flex;
+        justify-content: center;
+        justify-content: space-around;
 }
 
 article {
-	flex: 4 
+        flex: 4
 }
 
 aside {
-	flex: 1
+        flex: 1
 }
 
 .verticalLine {
-	border-left: thick solid #333;
+        border-left: thick solid #333;
 }
 
