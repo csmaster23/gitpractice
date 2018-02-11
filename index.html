@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <head>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <title>Lab 2</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="homes">
+    <nav>
+    <ul>
+      <li><a href="index.html">Weather</a></li>
+      <li><a href="stack.html">Stack Overflow</a></li>
+      
+    </ul>
+    </nav>
+    <h1 style="color:black;">Weather</h1>
+    <hr>
 
-<link rel="stylesheet" href="portfolio.css">
-<link href='https://fonts/googleapis.com/css?family=Merienda One' rel="stylesheet">
-<nav>
- <ul>
-  <li><a href="index.html">Home</a></li>
-  <li><a href="projects.html">Portfolio</a></li>
-  <li><a href="experience.html">The Artist</a></li>
-  <li><a href="contact.html">Contact Me</a></li>
-  <li><a href="reviews.html">Reviews</a></li>
-</ul>
-</nav>
- 
-<h1 style="text-align:center">Tanner Norton Photography</h1>
+    <form>
+      <label>Enter a U.S. city</label>
+      <input id="weatherInput" type="text"></input><br/>
+      <input id="weatherSubmit" type="submit" value="Submit"></input>
+    </form>
 
-<hr>
-
-
-<section class="main_image">
-	<img src="https://static.pexels.com/photos/206359/pexels-photo-206359.jpeg">
-</section>
-
-<div class="footer">
-	<a href="https://github.com/BYU-CS260-Winter-2018/lab-1-csmaster23">GitHubURL</a>
-</div>
+    <div id="weatherResults"></div>
 
 
 
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script text="type/javascript" src="/script.js">
+    </script>
+   
+
+  </body>
+  <footer id="sticky_index"><a href="https://github.com/BYU-CS260-Winter-2018/lab-2-csmaster23.git">Github</a></footer>
 </html>
