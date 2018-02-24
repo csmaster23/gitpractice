@@ -1,65 +1,144 @@
-$(document).ready(function() {
-	$("#weatherSubmit").click(function(e) {
-	e.preventDefault();
-	var value = $("#weatherInput").val();
-    var myurl= "http://api.openweathermap.org/data/2.5/weather?q=" + value + ",US&units=imperial" + "&APPID=3b3753a040fd55761ebbcdb1426dc805";
-	$.ajax({
-	    url : myurl,
-	    dataType : "json",
-	    success : function(json) {
-	    	var results = "";
-		results += '<h2>Weather in ' + json.name + "</h2>";
-		/*results += '<div class="weatherimg">'
-		for (var i=0; i<json.weather.length; i++) {
-		    results += '<img style="text-align:center" src="http://openweathermap.org/img/w/' + json.weather[i].icon + '.png"' + ' class="images" />';
-		    
-		}
-		results += '</div>'*/
-		
-		results += "<p>"
-		results += '<h2>' + json.main.temp + " &deg;F</h2>"
-		results += '<h3>' + 'Wind Speed: ' + json.wind.speed + ' mph' + '</h3>'
-		results += '<h3>' +  'Wind Direction: ' + json.wind.deg + "&deg;</h3>"
-		results += '<h3>' + 'Humidity: ' + json.main.humidity + "%</h3>"
-		for (var i=0; i<json.weather.length; i++) {
-		    results += '<h3>' + json.weather[i].main + ': ' + json.weather[i].description + '</h3>'
-		    
-		}
-		
-		results += "</p>";
-		$("#weatherResults").html(results);
+Vue.component('star-rating', VueStarRating.default);
 
-		console.log(json);
-	    }
-		});
-    });
-
-	$("#stackSubmit").click(function(e) {
-	e.preventDefault();
-	var value = $("#stackInput").val();
-	var myurl = "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&site=stackoverflow&intitle=" + value;
-		
-	$.ajax({
-		url : myurl,
-		dataType : "json",
-		success : function(json) {
-			var results = "";
-		results += '<div class="result_class"'
-		results += '<h2> Results: ' + json.items.length + '</h2>';
-
-		for (var i=0; i<json.items.length; i++) {
-			results += '<h4> <a href=' + json.items[i].link + '>' + json.items[i].title + ' -View Count: ' + json.items[i].view_count + '</a></h4>'		
-		}//end for
-		
-		results += '</div>'
-
-		$("#stackResults").html(results);
-		console.log(json);
-		}//json function
-		})//end ajax function
-
-	})//end click function
-
-
-
+var app = new Vue({
+  el: '#app',
+  data: {
+    number: '',
+    max: '',
+    current: {},
+    loading: true,
+    addedName: '',
+    addedComment: '',
+    date: '',
+    comments: {},
+    rating: 0,
+    totalRating: 0,
+    numberRatings: 0,
+    testAverage: 0,
+    averageRatings: {},
+  },
+  created: function() {
+    this.xkcd();
+  },
+  computed: {
+    /*realAverage: function() {
+      return this.averageRatings[this.number][this.averageRatings.length - 1].averaged;
+    },*/
+    month: function() {
+      var month = new Array;
+      if (this.current.month === undefined)
+  return '';
+      month[0] = "January";
+      month[1] = "February";
+      month[2] = "March";
+      month[3] = "April";
+      month[4] = "May";
+      month[5] = "June";
+      month[6] = "July";
+      month[7] = "August";
+      month[8] = "September";
+      month[9] = "October";
+      month[10] = "November";
+      month[11] = "December";
+      return month[this.current.month - 1];
+    }
+  },
+  watch: {
+    number: function(value,oldvalue) {
+      if (oldvalue === '') {
+  this.max = value;
+      } else {
+  this.xkcd();
+      }
+    },
+  },
+methods: {
+    xkcd: function() {
+      this.loading = true;
+      fetch('https://xkcd.now.sh/' + this.number).then(response => {
+	return response.json();
+      }).then(json => {
+	this.current = json;
+  //console.log(this.current)
+  this.loading = false;
+  this.number = json.num;
+  //console.log(this.number)
+	return true;
+      }).catch(err => {
+        this.number = this.max;
+      });
+    },
+    previousComic: function() {
+      this.number = this.current.num - 1;
+    },
+    getMax: function(max) {
+      max = Math.floor(max);
+      //console.log(max);
+      return max;
+    },
+    nextComic: function() {
+      //max = Math.floor(max);
+      max = this.getMax(this.max);
+      //console.log(max);
+      if (this.number === max)
+      {
+        this.number = 1;
+      }
+      else
+        this.number = this.current.num + 1;
+    },
+    getRandom: function(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      //console.log(max)
+      return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum and minimum are inclusive 
+    },
+    randomComic: function() {
+      this.number = this.getRandom(1, this.max);
+    },
+    firstComic: function() {
+      /*min = Math.ceil(min);*/
+      this.number = 1;
+    },
+    lastComic: function() {
+      max = this.getMax(this.max);
+      //console.log(max);
+      this.number = max;
+    },
+    todayDate: function() {
+      var today = new Date();
+      var hour = today.getHours();
+      var minute = today.getMinutes();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+      if(dd<10) {
+        dd = '0'+dd
+      }
+      if(mm<10) {
+        mm = '0'+mm
+      }
+      if (minute<10) {
+        minute = '0'+minute
+      }
+      today = hour + ":" + minute + " on " + mm + '-' + dd + '-' + yyyy;
+      return today;
+    },
+    addComment: function() {
+      if (!(this.number in this.comments))
+  Vue.set(app.comments, this.number, new Array);
+      this.comments[this.number].push({author:this.addedName,today:this.todayDate(),text:this.addedComment});
+      this.addedName = '';
+      this.addedComment = '';
+    },
+    addRating: function() {
+      if (!(this.number in this.averageRatings))
+        Vue.set(app.averageRatings, this.number, new Array);
+      this.totalRating = this.totalRating + this.rating;
+      this.numberRatings = this.numberRatings + 1;
+      this.testAverage = this.totalRating/this.numberRatings;
+      console.log(this.testAverage);
+      this.averageRatings[this.number].push({total:this.totalRating,numbers:this.numberRatings,averaged:this.testAverage});     
+    },
+  }
 });
