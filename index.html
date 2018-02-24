@@ -55,10 +55,10 @@
   <!-- <h3>Rating: {{rating}}</h3> -->
  <!-- <h3>Average Rating: {{testAverage}}</h3> -->
   <!-- <h3>Average Rating: {{averageRatings.averaged}}</h3> -->
-  <h3>Average Rating: </h3>
-  <div v-for="(averageRatings, index) in averageRatings[number]">
+  <h3>Average Rating: {{theAverages}}</h3>
+  <!-- <div v-for="(averageRatings, index) in averageRatings[number]">
     <div v-if="index != averageRatings.length - 1">{{averageRatings.averaged}}</div>
-  </div>
+  </div> -->
   <h3>Add a Comment</h3>
   <form v-on:submit.prevent="addComment">
     <input v-model="addedName" placeholder="Name"></p>
@@ -78,7 +78,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
-    <script src="/script.js"></script>
+    <script src="./script.js"></script>
   </body>
   <footer id="sticky_index"><a href="https://github.com/BYU-CS260-Winter-2018/lab-3-csmaster23.git">Github</a></footer>
 </html>

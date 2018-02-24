@@ -21,9 +21,13 @@ var app = new Vue({
     this.xkcd();
   },
   computed: {
-    /*realAverage: function() {
-      return this.averageRatings[this.number][this.averageRatings.length - 1].averaged;
-    },*/
+    theAverages: function() {
+      //console.log(this.averageRatings[this.number].sum/this.averageRatings[this.number].number);
+      if (this.averageRatings[this.number] === undefined)
+        return 0;
+      return (this.averageRatings[this.number].sum/this.averageRatings[this.number].number);
+      //return -1;
+    },
     month: function() {
       var month = new Array;
       if (this.current.month === undefined)
@@ -131,14 +135,41 @@ methods: {
       this.addedName = '';
       this.addedComment = '';
     },
-    addRating: function() {
+    addRating: function(rating) {
+      console.log(this.rating);
       if (!(this.number in this.averageRatings))
+        Vue.set(this.averageRatings,this.number,{sum:0,number:0});
+      this.averageRatings[this.number].sum += rating;
+      this.averageRatings[this.number].number += 1;
+      
+      console.log(this.averageRatings[this.number]);
+      console.log(this.averageRatings[this.number].sum);
+      console.log(this.averageRatings[this.number].number);
+    },
+  }
+});
+
+/*data: {
+    number: '',
+    max: '',
+    current: {},
+    loading: true,
+    addedName: '',
+    addedComment: '',
+    date: '',
+    comments: {},
+    rating: 0,
+    totalRating: 0,
+    numberRatings: 0,
+    testAverage: 0,
+    averageRatings: {},
+  },*/
+
+/*if (!(this.number in this.averageRatings))
         Vue.set(app.averageRatings, this.number, new Array);
       this.totalRating = this.totalRating + this.rating;
       this.numberRatings = this.numberRatings + 1;
       this.testAverage = this.totalRating/this.numberRatings;
       console.log(this.testAverage);
-      this.averageRatings[this.number].push({total:this.totalRating,numbers:this.numberRatings,averaged:this.testAverage});     
-    },
-  }
-});
+      this.averageRatings[this.number].push({total:this.totalRating,numbers:this.numberRatings,averaged:this.testAverage});
+      console.log(this.averageRatings[this.number])*/
